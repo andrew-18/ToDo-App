@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>To-dos</ion-title>
+    <ion-buttons slot='primary'>
+      <ion-button (click)='addTodo()'>
+        <ion-icon name='add' slot='icon-only'></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf='!((todos$ | async)?.length)'>
+    <p>No todos</p>
+  </div>
+  <ion-list>
+    <ion-item-sliding *ngFor='let todo of (todos$ | async)' #slidingItem>
+      <ion-item>
+        <ion-label>{{ todo.label }}</ion-label>
+      </ion-item>
+      <ion-item-options side='start'>
+        <ion-item-option color='primary' (click)='updateTodo(todo, slidingItem)'>
+          <ion-icon name='create' slot='icon-only'></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item-options side='end'>
+        <ion-item-option color='danger' (click)='removeTodo(todo, slidingItem)'>
+          <ion-icon name="trash" slot="icon-only"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
