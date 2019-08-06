@@ -9,7 +9,7 @@ import { of } from 'rxjs/internal/observable/of';
 export class TodoService {
   todos: Todo[] = [
     {
-      id: 1,
+      id: 0,
       label: 'Do this'
     }
   ];

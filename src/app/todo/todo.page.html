@@ -10,10 +10,13 @@
 </ion-header>
 
 <ion-content padding>
-  <div *ngIf='!((todos$ | async)?.length)'>
+  <div *ngIf='(loading$ | async)'>
+    <ion-spinner color='primary' text-center></ion-spinner>
+  </div>
+  <div *ngIf='!((todos$ | async)?.length) && !(loading$ | async)'>
     <p>No todos</p>
   </div>
-  <ion-list>
+  <ion-list *ngIf='!(loading$ | async)'>
     <ion-item-sliding *ngFor='let todo of (todos$ | async)' #slidingItem>
       <ion-item>
         <ion-label>{{ todo.label }}</ion-label>
