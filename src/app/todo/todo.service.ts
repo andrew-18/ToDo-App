@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Todo } from '../models/todo.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { of } from 'rxjs/internal/observable/of';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 
 interface TodoData {
@@ -17,18 +17,12 @@ export class TodoService {
 
   get todos() {
     return this._todos.asObservable();
-  };
-
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Authorization': 'myY5jxStQRZUCQRiE6g8phmbo1G2'
-    })
-  };
+  }
 
   constructor(private http: HttpClient) {}
 
   getTodos(): Observable<Todo[]> {
-    return this.http.get<{ [key: string]: TodoData }>('https://todoapp-de478.firebaseio.com/todos.json', this.httpOptions)
+    return this.http.get<{ [key: string]: TodoData }>('https://todoapp-de478.firebaseio.com/todos.json')
     .pipe(
       map(resData => {
         const resTodos = [];
@@ -83,7 +77,7 @@ export class TodoService {
         this._todos.next(updatedTodos);
         return of(todoToRemove);
       })
-    )
+    );
   }
 
   updateTodo(todoId: string, label: string): Observable<Todo> {
