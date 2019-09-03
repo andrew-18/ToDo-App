@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import * as fromStore from '../store';
 import { Todo } from '../models/todo.model';
 import { AlertController, IonItemSliding, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo',
@@ -17,7 +18,8 @@ export class TodoPage implements OnInit {
   constructor(
     private store: Store<fromStore.AppState>,
     public alertController: AlertController,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public router: Router
   ) {}
 
   ngOnInit() {
@@ -50,6 +52,10 @@ export class TodoPage implements OnInit {
     setTimeout(() => {
       event.target.complete();
     }, 2000);
+  }
+
+  onArchiveClicked() {
+    this.router.navigateByUrl('/archive');
   }
 
   addTodo() {
