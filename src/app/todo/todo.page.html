@@ -10,6 +10,12 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-refresher slot='fixed' (ionRefresh)='getTodos($event)'>
+    <ion-refresher-content
+    pullingIcon="arrow-dropdown"
+    refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
   <div *ngIf='(loading$ | async)'>
     <ion-spinner color='primary' text-center></ion-spinner>
   </div>

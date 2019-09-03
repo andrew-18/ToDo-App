@@ -1,4 +1,11 @@
 export interface Todo {
-    id: number;
+    id: string;
     label: string;
+}
+
+export class Todo {
+    constructor(
+        public id: string,
+        public label: string
+    ) {}
 }

@@ -68,7 +68,7 @@ export class RemoveTodoFail implements Action {
 
 export class UpdateTodo implements Action {
     readonly type = UPDATE_TODO;
-    constructor(public payload: { todoId: number, newLabel: string }) {}
+    constructor(public payload: { todoId: string, newLabel: string }) {}
 }
 
 export class UpdateTodoSuccess implements Action {

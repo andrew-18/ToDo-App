@@ -44,6 +44,14 @@ export class TodoPage implements OnInit {
     });
   };
 
+  getTodos(event) {
+    this.store.dispatch(new fromStore.LoadTodos());
+
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
+
   addTodo() {
     this.alertController.create({
       header: 'Add todo',
@@ -64,11 +72,7 @@ export class TodoPage implements OnInit {
           role: 'add',
           handler: data => {
             if (this.validateInput(data.newLabel)) {
-              let todoLength: number = null;
-              this.todos$.subscribe(data => {
-                todoLength = data.length;
-              });
-              const newTodo: Todo = { id: todoLength, label: data.newLabel };
+              const newTodo: Todo = { id: Math.random().toString(), label: data.newLabel };
               this.store.dispatch(new fromStore.AddTodo(newTodo));
             } else {
               this.showToastError();
